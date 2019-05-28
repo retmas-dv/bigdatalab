@@ -1,0 +1,75 @@
+{% extends "siteapp/appbase.html" %}
+{% block wrapperBlock %}
+    <!-- Carousel -->
+    <div class="main-slideshow">
+        <div id="main-slideshow" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="item active">
+                    <div class="jumbotron first">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h1 class="animated slideInLeft">{{ slideOneHeader }}</h1>
+
+                                    <p class="lead animated slideInLeft delay-1">{{ slideOneDescription }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="item">
+                    <div class="jumbotron second">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h1 class="animated slideInLeft">{{ slideSecondHeader }}</h1>
+
+                                    <p class="lead animated slideInLeft delay-1">{{ slideSecondDescription }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="item">
+                    <div class="jumbotron third">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h1 class="animated slideInLeft">{{ slideThirdHeader }}</h1>
+
+                                    <p class="lead animated slideInLeft delay-1">{{ slideThirdDescription }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Controls -->
+            <a class="slideshow-arrow slideshow-arrow-prev bg-hover-color" href="#main-slideshow" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="slideshow-arrow slideshow-arrow-next bg-hover-color" href="#main-slideshow" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+    </div> <!-- / Carousel -->
+
+    <!-- Intro text -->
+    <div class="container intro">
+        <div class="row">
+            <div class="col-sm-10">
+                <h2 class="text-color">{{ introHeader }}</h2>
+
+                <p align="left" class="text-muted">{{ introDescription }}</p>
+            </div>
+        </div>
+        <!-- / Intro text -->
+        <hr>
+
+        <!-- Content HERE -->
+
+    </div> <!-- / .container -->
+{% endblock %}

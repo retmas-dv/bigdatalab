@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{{ description }}">
+        <meta name="author" content="retmas">
+        <title>{{ title }}</title>
+
+        {% load staticfiles %}
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+        <!-- Custom styles for this template -->
+        <link href="{% static "siteapp/css/color-styles.css" %}" rel="stylesheet">
+        <link href="{% static "siteapp/css/ui-elements.css" %}" rel="stylesheet">
+        <link href="{% static "siteapp/css/custom.css" %}" rel="stylesheet">
+        <link href="{% static "siteapp/css/animate.css" %}" rel="stylesheet">
+
+        {% block resourcesBlock %}
+        {% endblock %}
+
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href='http://fonts.googleapis.com/css?family=Scada:400,700,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,500,400italic,500italic,700italic&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body class="body-blue">
+
+    <!-- Extra Bar -->
+    <div class="mini-navbar mini-navbar-white hidden-xs">
+        <div class="container">
+            <div class="col-sm-12">
+                <a href="http://www.nrcki.ru/" class="first-child">НИЦ <b>&quot;КУРЧАТОВСКИЙ ИНСТИТУТ&quot;</b></a>
+                <a href="mailto:{{ emailContact }}" class="pull-right"><i class="fa fa-envelope"></i> Email<span class="hidden-sm">: {{ emailContact }}</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-dark navbar-static-top" role="navigation">
+        <div class="container">
+
+            <!-- Navbar Header -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"> Лаборатория Big Data технологий </a>
+            </div> <!-- / Navbar Header -->
+
+            <!-- Navbar Links -->
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% for menu_item in menu_items %}
+                        {% if menu_item.items %}
+                            {% if current_url == menu_item.link.url %}
+                                <li class="dropdown active">
+                                    {% else %}
+                                <li class="dropdown">
+                            {% endif %}
+                        <a href="{{ menu_item.link.url }}" class="dropdown-toggle bg-hover-color" data-toggle="dropdown">
+                            {{ menu_item.name }} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {% for item in menu_item.items %}
+                                <li><a href="{{ item.link.url }}" class="bg-hover-color">{{ item.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        </li>
+                        {% else %}
+                            {% if current_url == menu_item.link.url %}
+                                <li class="active">
+                                    {% else %}
+                                <li>
+                            {% endif %}
+                        <a href="{{ menu_item.link.url }}" class="bg-hover-color">{{ menu_item.name }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div> <!-- / Navbar Links -->
+
+        </div> <!-- / .container -->
+    </div> <!-- / navbar -->
+
+    <!-- wrapper -->
+    <div class="wrapper">
+        {% if current_url != '/' %}
+            <!-- Topic Header -->
+            <div class="topic">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            {% if page_name %}
+                                <h3 class="primary-font">{{ page_name }}</h3>
+                            {% else %}
+                                <h3 class="primary-font">Текущая страница</h3>
+                            {% endif %}
+                        </div>
+                        <div class="col-sm-8">
+                            <ol class="breadcrumb pull-right hidden-xs">
+                                <li><a href="/">Главная</a></li>
+                                {% if breadcrumbs %}
+                                    {% for item in breadcrumbs %}
+                                        {% if item.link.url %}
+                                            <li><a href="{{ item.link.url }}">{{ item.name }}</a></li>
+                                        {%  else %}
+                                            <li>{{ item.name }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                {% if page_name %}
+                                    <li class="active">{{ page_name }}</li>
+                                {% else %}
+                                    <li class="active">Текущая страница</li>
+                                {% endif %}
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- / Topic Header -->
+        {% endif %}
+        {% block wrapperBlock %}
+        {% endblock %}
+    </div>
+    <!-- / .wrapper -->
+
+    <!-- Footer -->
+    <footer class="footer-dark">
+        <div class="container">
+            <div class="row">
+                <!-- About Us -->
+                <div class="col-sm-4">
+                    <h3 class="text-color"><span class="border-color">О проекте</span></h3>
+                    <div class="content">
+                        <p>
+                            {{ aboutShort }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Where -->
+                <div class="col-sm-4">
+                    <h3 class="text-color"><span>Контакты</span></h3>
+                    <div class="content ">
+                        <p>
+                            {#Тел.: {{ telephone }}<br/>#}
+                            Email: <a href="mailto:{{ emailAdmin }}">{{ emailAdmin }}</a><br/>
+                            {{ addressLine }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Social icons -->
+                <div class="col-sm-4">
+                    <h3 class="text-color"><span>Социальные сети</span></h3>
+                    <div class="content social">
+                        <ul class="list-inline">
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Separator -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <hr>
+                </div>
+            </div>
+            <!--Copyrights -->
+            <div class="row">
+                <div class="col-sm-12">
+                    <p>&copy; Лаборатория Big Data технологий, НИЦ &quot;Курчатовский институт&quot;, {{ currentYear }}<br/></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="{% static "siteapp/js/scrolltopcontrol.js" %}"></script>
+    <script src="{% static "siteapp/js/jquery.sticky.js" %}"></script>
+
+    {% block javaScriptBlock %}
+    {% endblock %}
+
+    <script src="{% static "siteapp/js/custom.js" %}"></script>
+
+    </body>
+</html>
