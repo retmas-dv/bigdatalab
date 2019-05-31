@@ -1,6 +1,5 @@
 # -*- coding: cp1251 -*-
 from django.db import models
-from twisted.python.lockfile import unique
 
 
 class Setting(models.Model):
